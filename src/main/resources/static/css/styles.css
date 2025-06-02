@@ -12,6 +12,10 @@ body {
     flex-direction: column;
 }
 
+section {
+    background: transparent;
+}
+
 h1 {
     font-size: 48px;
     font-style: normal;
@@ -86,6 +90,7 @@ button {
     width: calc(100% - 16px);
     position: fixed;
     box-sizing: border-box;
+    z-index: 9999;
 }
 
 .header-container {

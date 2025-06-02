@@ -1,0 +1,213 @@
+/* Hero Banner */
+.hero-banner {
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 176px;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/home-banner.png");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    border-radius: 40px;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.contact-item {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+}
+
+.contact-label {
+    opacity: 0.8;
+}
+
+.contact-value {
+    font-weight: 600;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+}
+
+.section-container {
+    background: transparent;
+    margin: 0;
+    padding: 32px 32px;
+}
+
+.section-title {
+    font-size: 32px;
+    font-weight: 600;
+    color: #15803d;
+    margin-bottom: 32px;
+}
+
+.map-container {
+    width: 100%;
+    height: 450px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.leaflet-map {
+    width: 100%;
+    height: 100%;
+}
+
+.schedule-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+    padding: 0 32px;
+}
+
+.schedule-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.schedule-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.day {
+    font-weight: 500;
+    color: #374151;
+}
+
+.time {
+    color: #15803d;
+    font-weight: 600;
+}
+
+.schedule-image {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.schedule-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.image-placeholder {
+    height: 160px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .schedule-content {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .hero-content {
+        max-width: 100%;
+    }
+
+    .campaign-info {
+        text-align: left;
+    }
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    padding: 0 32px;
+}
+
+.contact-group {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.contact-group .contact-label {
+    font-size: 14px;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.contact-group .contact-value {
+    font-size: 16px;
+    color: #15803d;
+    font-weight: 600;
+}
+
+/* Leaflet Map Customizations */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+}
+
+.leaflet-popup-content {
+    margin: 16px;
+    font-family: inherit;
+}
+
+.container-popup {
+    text-align: center;
+}
+
+.container-popup h4 {
+    color: #15803d;
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.container-popup p {
+    margin: 4px 0;
+    font-size: 14px;
+    color: #374151;
+}
+
+.container-status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.status-available {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.status-full {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.status-maintenance {
+    background-color: #fef3c7;
+    color: #92400e;
+}

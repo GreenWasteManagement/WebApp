@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viana Circular - Autenticação</title>
+  <link rel="icon" th:href="@{/images/app_logo_white.svg}" type="image/png" />
+  <link rel="stylesheet" th:href="@{/css/styles.css}">
+  <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+  <div class="header-container">
+    <div class="logo-section">
+      <img class="logo" th:src="@{/images/app_logo_white.svg}" alt="">
+      <h1>Viana Circular</h1>
+    </div>
+    <nav class="navigation">
+      <a th:href="@{/}" class="nav-link">Página inicial</a>
+      <a th:href="@{/campanha}" class="nav-link">A campanha</a>
+      <a th:href="@{/contentores}" class="nav-link">Contentores</a>
+      <a th:href="@{/perfil}" class="nav-link">Perfil</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main class="main-content">
+  <div class="login-container">
+    <h2 class="login-title">Autenticação</h2>
+
+    <!-- Display error message if login fails -->
+    <div th:if="${param.error}" class="error-message">
+      <p>Nome de utilizador ou palavra-passe inválidos.</p>
+    </div>
+
+    <!-- Display logout message -->
+    <div th:if="${param.logout}" class="success-message">
+      <p>Sessão terminada com sucesso.</p>
+    </div>
+
+    <div class="login-form-container">
+      <form th:action="@{/login}" method="post" class="login-form">
+        <div class="form-group">
+          <label for="username" class="form-label">Nome de utilizador:</label>
+          <input type="text"
+                 id="username"
+                 name="username"
+                 class="form-input"
+                 required
+                 th:value="${username}">
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">Palavra-passe:</label>
+          <input type="password"
+                 id="password"
+                 name="password"
+                 class="form-input"
+                 required>
+        </div>
+
+        <div class="checkbox-group">
+          <input type="checkbox"
+                 id="showPassword"
+                 class="checkbox-input">
+          <label for="showPassword" class="checkbox-label">Mostrar palavra-passe</label>
+        </div>
+
+        <button type="submit" class="login-button">Aceder</button>
+      </form>
+    </div>
+
+    <p class="register-link">
+      Ainda não aderiu?
+      <a th:href="@{/register}" class="register-anchor">Registe-se aqui.</a>
+    </p>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-logo-section">
+      <img class="logo" th:src="@{/images/app_logo_white.svg}" alt="">
+      <div class="footer-text">
+        <h3>Viana Circular</h3>
+        <p>Recolha de resíduos verdes</p>
+      </div>
+    </div>
+    <div class="footer-credits">
+      <p>2025 Viana Circular IPVC | Projeto desenvolvido por: André Costa, Miguel Cruz</p>
+      <img class="smvc-logo" th:src="@{/images/smvc_logo.svg}" alt="">
+    </div>
+  </div>
+</footer>
+
+<script th:src="@{/js/login.js}"></script>
+</body>
+</html>

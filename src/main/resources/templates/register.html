@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viana Circular - Registo</title>
+    <link rel="icon" th:href="@{/images/app_logo_white.svg}" type="image/png" />
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/register.css}">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo-section">
+                <img class="logo" th:src="@{/images/app_logo_white.svg}" alt="">
+                <h1>Viana Circular</h1>
+            </div>
+            <nav class="navigation">
+                <a th:href="@{/}" class="nav-link">Página inicial</a>
+                <a th:href="@{/campanha}" class="nav-link">A campanha</a>
+                <a th:href="@{/contentores}" class="nav-link">Contentores</a>
+                <a th:href="@{/perfil}" class="nav-link">Perfil</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="register-container">
+            <h2 class="register-title">Registo</h2>
+
+            <!-- Display validation errors -->
+            <div class="error-message">
+                <ul class="error-list">
+                    <li></li>
+                </ul>
+            </div>
+
+            <!-- Display success message -->
+            <div class="success-message">
+                <p></p>
+            </div>
+
+            <div class="register-form-container">
+                <form th:action="@{/register}" method="post" class="register-form">
+
+                    <!-- First Row: Nome completo and Nome de utilizador -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName" class="form-label">Nome completo:</label>
+                            <input type="text"
+                                   id="fullName"
+                                   class="form-input"
+                                   required>
+                            <span
+                                  class="field-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="username" class="form-label">Nome de utilizador:</label>
+                            <input type="text"
+                                   id="username"
+                                   class="form-input"
+                                   required>
+                            <span
+                                  class="field-error"></span>
+                        </div>
+                    </div>
+
+                    <!-- Second Row: Email and Número de telemóvel -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email"
+                                   id="email"
+                                   class="form-input"
+                                   required>
+                            <span
+                                  class="field-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phoneNumber" class="form-label">Número de telemóvel:</label>
+                            <input type="tel"
+                                   id="phoneNumber"
+                                   class="form-input"
+                                   placeholder="9XXXXXXXX">
+                            <span
+                                  class="field-error"></span>
+                        </div>
+                    </div>
+
+                    <!-- Third Row: Número de cartão cidadão and NIF -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="citizenCardNumber" class="form-label">Número de cartão cidadão:</label>
+                            <input type="text"
+                                   id="citizenCardNumber"
+                                   class="form-input"
+                                   placeholder="XXXXXXXXX">
+                            <span
+                                  class="field-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nif" class="form-label">NIF:</label>
+                            <input type="text"
+                                   id="nif"
+                                   class="form-input"
+                                   placeholder="XXXXXXXXX">
+                            <span
+                                  class="field-error"></span>
+                        </div>
+                    </div>
+
+                    <!-- Fourth Row: Rua and Porta -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="street" class="form-label">Rua:</label>
+                            <input type="text"
+                                   id="street"
+                                   class="form-input"
+                                   required>
+                            <span
+                                  class="field-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="doorNumber" class="form-label">Porta:</label>
+                            <input type="text"
+                                   id="doorNumber"
+                                   class="form-input">
+                            <span
+                                  class="field-error"></span>
+                        </div>
+                    </div>
+
+                    <!-- Fifth Row: Andar and Código postal -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="floor" class="form-label">Andar:</label>
+                            <input type="text"
+                                   id="floor"
+                                   class="form-input">
+                            <span
+                                  class="field-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="postalCode" class="form-label">Código postal:</label>
+                            <input type="text"
+                                   id="postalCode"
+                                   class="form-input"
+                                   placeholder="XXXX-XXX"
+                                   required>
+                            <span
+                                  class="field-error"></span>
+                        </div>
+                    </div>
+
+                    <!-- Sixth Row: Palavra-passe and Confirmar palavra-passe -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="password" class="form-label">Palavra-passe:</label>
+                            <input type="password"
+                                   id="password"
+                                   class="form-input"
+                                   required>
+                            <span
+                                  class="field-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirmPassword" class="form-label">Confirmar palavra-passe:</label>
+                            <input type="password"
+                                   id="confirmPassword"
+                                   class="form-input"
+                                   required>
+                            <span
+                                  class="field-error"></span>
+                        </div>
+                    </div>
+
+                    <!-- Show password checkbox -->
+                    <div class="checkbox-group">
+                        <input type="checkbox"
+                               id="showPasswords"
+                               class="checkbox-input">
+                        <label for="showPasswords" class="checkbox-label">Mostrar palavra-passe</label>
+                    </div>
+
+                    <!-- Register button -->
+                    <button type="submit" class="register-button">Registar</button>
+                </form>
+            </div>
+
+            <p class="login-link">
+                Já está inscrito?
+                <a th:href="@{/login}" class="login-anchor">Autentique-se aqui.</a>
+            </p>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo-section">
+                <img class="logo" th:src="@{/images/app_logo_white.svg}" alt="">
+                <div class="footer-text">
+                    <h3>Viana Circular</h3>
+                    <p>Recolha de resíduos verdes</p>
+                </div>
+            </div>
+            <div class="footer-credits">
+                <p>2025 Viana Circular IPVC | Projeto desenvolvido por: André Costa, Miguel Cruz</p>
+                <img class="smvc-logo" th:src="@{/images/smvc_logo.svg}" alt="">
+            </div>
+        </div>
+    </footer>
+
+    <script th:src="@{/js/register.js}"></script>
+</body>
+</html>

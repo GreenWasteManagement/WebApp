@@ -127,10 +127,12 @@
 .login-button {
     width: 100%;
     background-color: white;
-    color: #057222;
+    color: #004713;
+    align-self: center;
     border: none;
     border-radius: 16px;
     height: 48px;
+    max-width: 200px;
     cursor: pointer;
     transition: background-color 0.2s;
 }
