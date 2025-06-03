@@ -204,3 +204,9 @@ button {
         text-align: center;
     }
 }
+
+@media (max-width: 1000px) {
+    .logo-section h1 {
+        display: none;
+    }
+}

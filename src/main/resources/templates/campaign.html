@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viana Circular</title>
+    <link rel="icon" th:href="@{/images/app_logo_white.svg}" type="image/png" />
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/campaign.css}">
+</head>
+<body>
+<!-- Header -->
+<header class="header">
+    <div class="header-container">
+        <div class="logo-section">
+            <img class="logo" th:src="@{/images/app_logo_white.svg}" alt="">
+            <h1>Viana Circular</h1>
+        </div>
+        <nav class="navigation">
+            <a th:href="@{/}" class="nav-link">Página inicial</a>
+            <a th:href="@{/campanha}" class="nav-link">A campanha</a>
+            <a th:href="@{/contentores}" class="nav-link">Contentores</a>
+            <a th:href="@{/perfil}" class="nav-link">Perfil</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero-banner">
+    <div class="hero-image">
+    </div>
+</section>
+
+<!-- Main Content -->
+<main class="main-content">
+    <div class="content-container">
+        <!-- Campaign Section -->
+        <section class="campaign-section">
+            <h2 class="section-title">A campanha</h2>
+
+            <div class="content-block">
+                <p class="content-paragraph">
+                    Os serviços municipalizados de Viana do Castelo com o projeto Viana Circular têm ao dispor de todos os munícipes um novo serviço de recolha de
+                    resíduos verdes para entrega nos ecopontos especializados mais próximos da sua casa.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <p class="content-paragraph">
+                    Através da linha verde <strong>258 000 000</strong> ou enviando email para <a href="mailto:vianacircular@viana.pt" class="email-link">vianacircular@viana.pt</a>, qualquer cidadão pode solicitar o seu balde de serviço na qual
+                    poderá depositar os seus resíduos verdes no ecoponto especializado mais próximo da sua casa.
+                </p>
+            </div>
+
+            <div class="content-block">
+                <p class="content-paragraph">
+                    Através da plataforma Viana Circular poderá encontrar pontos de recolha dedicados para os seus resíduos verdes onde em cada depósito poderá
+                    contribuir para o meio ambiente de forma moderna e intuitiva, ficando com o registo dos seus depósitos e podendo consultar os seus benefícios
+                    arrecadados ao longo dos seus depósitos.
+                </p>
+            </div>
+        </section>
+
+        <!-- Green Waste Section -->
+        <section class="green-waste-section">
+            <h2 class="section-title">O que são resíduos verdes?</h2>
+
+            <div class="content-block">
+                <p class="content-paragraph">
+                    Resíduos verdes são resíduos de origem vegetal provenientes de jardins, quintais, ou atividades de manutenção de espaços verdes. Esses resíduos
+                    são biodegradáveis e, por isso, muitas vezes podem ser compostados ou transformados em fertilizante natural.
+                </p>
+
+                <p class="content-paragraph">
+                    Alguns exemplos destes resíduos são:
+                </p>
+
+                <ul class="waste-examples-list">
+                    <li>Aparas de relva;</li>
+                    <li>Flores e plantas ornamentais;</li>
+                    <li>Folhas de plantas, arvores e palmeiras;</li>
+                    <li>Arbustos e ramos de árvores.</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-logo-section">
+            <img class="logo" th:src="@{/images/app_logo_white.svg}" alt="">
+            <div class="footer-text">
+                <h3>Viana Circular</h3>
+                <p>Recolha de resíduos verdes</p>
+            </div>
+        </div>
+        <div class="footer-credits">
+            <p>2025 Viana Circular IPVC | Projeto desenvolvido por: André Costa, Miguel Cruz</p>
+            <img class="smvc-logo" th:src="@{/images/smvc_logo.svg}" alt="">
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
