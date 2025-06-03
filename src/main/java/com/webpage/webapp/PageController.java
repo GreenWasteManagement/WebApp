@@ -25,4 +25,9 @@ public class PageController {
     public String campaign() {
         return "campaign";
     }
+
+    @GetMapping("/profile")
+    public String profile() {
+        return "profile";
+    }
 }

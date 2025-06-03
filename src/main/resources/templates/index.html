@@ -17,21 +17,7 @@
             crossorigin=""></script>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-container">
-            <div class="logo-section">
-                <img class="logo" th:src="@{/images/app_logo_white.svg}" alt="">
-                <h1>Viana Circular</h1>
-            </div>
-            <nav class="navigation">
-                <a th:href="@{/}" class="nav-link">Página inicial</a>
-                <a th:href="@{/campanha}" class="nav-link">A campanha</a>
-                <a th:href="@{/contentores}" class="nav-link">Contentores</a>
-                <a th:href="@{/perfil}" class="nav-link">Perfil</a>
-            </nav>
-        </div>
-    </header>
+    <div th:insert="~{components/header :: header}"></div>
 
     <!-- Hero Banner -->
     <section class="hero-banner">
@@ -116,22 +102,7 @@
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-logo-section">
-                <img class="logo" th:src="@{/images/app_logo_white.svg}" alt="">
-                <div class="footer-text">
-                    <h3>Viana Circular</h3>
-                    <p>Recolha de resíduos verdes</p>
-                </div>
-            </div>
-            <div class="footer-credits">
-                <p>2025 Viana Circular IPVC | Projeto desenvolvido por: André Costa, Miguel Cruz</p>
-                <img class="smvc-logo" th:src="@{/images/smvc_logo.svg}" alt="">
-            </div>
-        </div>
-    </footer>
+    <div th:insert="~{components/footer :: footer}"></div>
 
     <script
             src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"

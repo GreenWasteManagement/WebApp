@@ -8,9 +8,14 @@
 body {
     min-height: 100vh;
     background-color: #F0F0F0;
+    /*background-image: url('../images/app_logo_bg.svg');*/
+    /*background-position: left 10% top 50%;*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: 1000px auto;*/
     display: flex;
     flex-direction: column;
 }
+
 
 section {
     background: transparent;

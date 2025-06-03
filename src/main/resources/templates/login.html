@@ -3,27 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Viana Circular - Autenticação</title>
+  <title>Viana Circular | Autenticação</title>
   <link rel="icon" th:href="@{/images/app_logo_white.svg}" type="image/png" />
   <link rel="stylesheet" th:href="@{/css/styles.css}">
   <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 <body>
-<!-- Header -->
-<header class="header">
-  <div class="header-container">
-    <div class="logo-section">
-      <img class="logo" th:src="@{/images/app_logo_white.svg}" alt="">
-      <h1>Viana Circular</h1>
-    </div>
-    <nav class="navigation">
-      <a th:href="@{/}" class="nav-link">Página inicial</a>
-      <a th:href="@{/campanha}" class="nav-link">A campanha</a>
-      <a th:href="@{/contentores}" class="nav-link">Contentores</a>
-      <a th:href="@{/perfil}" class="nav-link">Perfil</a>
-    </nav>
-  </div>
-</header>
+
+<div th:insert="~{components/header :: header}"></div>
 
 <!-- Main Content -->
 <main class="main-content">
@@ -79,22 +66,7 @@
   </div>
 </main>
 
-<!-- Footer -->
-<footer class="footer">
-  <div class="footer-container">
-    <div class="footer-logo-section">
-      <img class="logo" th:src="@{/images/app_logo_white.svg}" alt="">
-      <div class="footer-text">
-        <h3>Viana Circular</h3>
-        <p>Recolha de resíduos verdes</p>
-      </div>
-    </div>
-    <div class="footer-credits">
-      <p>2025 Viana Circular IPVC | Projeto desenvolvido por: André Costa, Miguel Cruz</p>
-      <img class="smvc-logo" th:src="@{/images/smvc_logo.svg}" alt="">
-    </div>
-  </div>
-</footer>
+<div th:insert="~{components/footer :: footer}"></div>
 
 <script th:src="@{/js/login.js}"></script>
 </body>
