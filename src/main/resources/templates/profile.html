@@ -67,14 +67,24 @@
                 <h2 class="section-title">Os meus baldes</h2>
             </div>
             <div class="section-content">
-                <div class="empty-line"></div>
-                <div class="empty-line"></div>
-                <div class="empty-line"></div>
                 <!-- Dynamic content for buckets would go here -->
                 <div>
                     <div class="item-row">
-                        <span>Teste</span>
-                        <span>Teste</span>
+                        <span>Balde</span>
+                        <span>Capacidade (Kg)</span>
+                        <span>Estado</span> <!-- TRUE SIGNIFICA ATIVO E FALSE INATIVO -->
+                    </div>
+                    <div class="empty-line"></div>
+                    <div class="item-row">
+                        <span>1234</span>
+                        <span>5</span>
+                        <span>Ativo</span>
+                    </div>
+                    <div class="empty-line"></div>
+                    <div class="item-row">
+                        <span>5633</span>
+                        <span>10</span>
+                        <span>Inativo</span>
                     </div>
                 </div>
             </div>
@@ -86,23 +96,53 @@
                 <h2 class="section-title">Os meus depósitos</h2>
                 <a class="register-button">Registar depósito</a>
             </div>
-            <div class="section-content">
-                <div class="empty-line"></div>
-                <div class="empty-line"></div>
-                <div class="empty-line"></div>
+            <div class="section-content records-section">
                 <!-- Dynamic content for deposits would go here -->
-                <div>
+                <div id="deposits">
                     <div class="item-row">
-                        <span>Teste</span>
-                        <span>Teste</span>
-                        <span>Teste</span>
+                        <span>Data</span>
+                        <span>Quantidade</span>
+                        <span>Contentor</span>
                     </div>
+                    <div class="empty-line"></div>
+                    <div class="item-row">
+                        <span>2025-01-15</span>
+                        <span>3</span>
+                        <span>A</span>
+                    </div>
+                    <div class="empty-line"></div>
+                    <div class="item-row">
+                        <span>2025-02-03</span>
+                        <span>1</span>
+                        <span>B</span>
+                    </div>
+                    <div class="empty-line"></div>
+                    <div class="item-row">
+                        <span>2025-02-20</span>
+                        <span>2</span>
+                        <span>C</span>
+                    </div>
+                    <div class="empty-line"></div>
+                    <div class="item-row">
+                        <span>2025-03-05</span>
+                        <span>1</span>
+                        <span>A</span>
+                    </div>
+                    <div class="empty-line"></div>
+                    <!-- …more rows… -->
+                </div>
+
+                <!-- Stats container where the chart will be drawn -->
+                <div id="stats">
+                    <!-- 1) Insert a <canvas> for Chart.js: -->
+                    <canvas id="depositsChart" style="max-width: none; border-radius: 32px;"></canvas>
                 </div>
             </div>
         </div>
     </div>
 
     <div th:insert="~{components/footer :: footer}"></div>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script th:src="@{/js/profile.js}"></script>
 </body>
 </html>

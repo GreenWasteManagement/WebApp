@@ -48,10 +48,10 @@
 }
 
 .section-title {
-    font-size: 32px;
     font-weight: 600;
     color: #15803d;
-    margin-bottom: 32px;
+    margin: 0 0 32px 0;
+    border-bottom: 2px solid #15803d;
 }
 
 .map-container {
@@ -135,6 +135,10 @@
     .campaign-info {
         text-align: left;
     }
+}
+
+.contacts-section {
+    margin-bottom: 64px;
 }
 
 .contact-grid {

@@ -109,6 +109,11 @@ button {
     display: flex;
     align-items: center;
     gap: 16px;
+    text-decoration: none;
+}
+
+.logo-section h1, .footer-logo-section h3 {
+    color: white;
 }
 
 .logo {
@@ -188,7 +193,6 @@ button {
 .smvc-logo {
     height: 48px;
     width: auto;
-    margin-top: 8px;
     background: white;
     padding: 8px;
     border-radius: 16px;
@@ -214,4 +218,8 @@ button {
     .logo-section h1 {
         display: none;
     }
+}
+
+div.leaflet-control-attribution.leaflet-control {
+    display: none;
 }
