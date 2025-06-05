@@ -18,7 +18,10 @@
         <!-- Profile Header -->
         <div class="profile-header">
             <h2 class="profile-title">Perfil</h2>
-            <a th:href="@{/profile/edit}" class="edit-button">Editar perfil</a>
+            <div style="display: flex; gap: 16px">
+                <a th:href="@{/profile/edit}" class="edit-button">Editar perfil</a>
+                <a class="logout-button">Terminar sessão</a>
+            </div>
         </div>
 
         <!-- Profile Form Section -->
@@ -94,7 +97,10 @@
         <div class="section">
             <div class="section-header">
                 <h2 class="section-title">Os meus depósitos</h2>
-                <a class="register-button">Registar depósito</a>
+                <div style="display: flex; gap: 16px">
+                    <a class="register-button" th:href="@{/rewards}">Recompensas</a>
+                    <a class="register-button">Registar depósito</a>
+                </div>
             </div>
             <div class="section-content records-section">
                 <!-- Dynamic content for deposits would go here -->

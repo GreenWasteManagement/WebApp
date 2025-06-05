@@ -50,7 +50,7 @@
 .section-title {
     font-weight: 600;
     color: #15803d;
-    margin: 0 0 32px 0;
+    margin: 0 32px 32px 32px;
     border-bottom: 2px solid #15803d;
 }
 
@@ -72,7 +72,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 48px;
     align-items: start;
-    padding: 0 32px;
+    padding: 0 64px;
 }
 
 .schedule-list {
@@ -120,21 +120,6 @@
     color: white;
     font-weight: 600;
     font-size: 16px;
-}
-
-@media (max-width: 768px) {
-    .schedule-content {
-        grid-template-columns: 1fr;
-        gap: 32px;
-    }
-
-    .hero-content {
-        max-width: 100%;
-    }
-
-    .campaign-info {
-        text-align: left;
-    }
 }
 
 .contacts-section {
@@ -214,4 +199,40 @@
 .status-maintenance {
     background-color: #fef3c7;
     color: #92400e;
+}
+
+@media (max-width: 768px) {
+    .section-container {
+        padding: 32px 0;
+    }
+
+    .schedule-content {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 0 16px;
+    }
+
+    .hero-content {
+        max-width: 100%;
+    }
+
+    .hero-image {
+        background-position: 68%;
+    }
+
+    .campaign-info {
+        text-align: left;
+    }
+
+    .section-title {
+        margin: 0 0 32px 0;
+    }
+    .contact-grid {
+        gap: 16px;
+        padding: 0 16px;
+    }
+
+    .contact-group {
+        flex-direction: row;
+    }
 }

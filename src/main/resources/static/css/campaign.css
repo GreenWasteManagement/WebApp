@@ -36,6 +36,7 @@
     color: #15803d;
     font-weight: 600;
     border-bottom: 2px solid #15803d;
+    margin: 0 32px;
 }
 
 .content-block {
@@ -50,7 +51,7 @@
     line-height: 1.7;
     color: #374151;
     text-align: justify;
-    padding: 0 32px;
+    padding: 0 64px;
 }
 
 .content-paragraph:last-child {
@@ -74,6 +75,17 @@
     margin-top: 16px;
 }
 
+.green-waste-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0 64px;
+}
+
+.green-waste-wrapper .content-paragraph {
+    padding: 0 32px 0 0;
+}
+
 .waste-examples-list li {
     font-size: 1rem;
     line-height: 1.7;
@@ -83,6 +95,24 @@
 }
 
 .waste-examples-list li:last-child {
+    margin-bottom: 0;
+}
+
+.steps-list {
+    margin-left: 16px;
+    margin-top: 16px;
+    padding: 0 96px;
+}
+
+.steps-list li {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #374151;
+    margin-bottom: 8px;
+    list-style-type: disc;
+}
+
+.steps-list li:last-child {
     margin-bottom: 0;
 }
 
@@ -100,25 +130,34 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .content-container {
+        padding: 32px 8px;
+    }
+
     .section-title {
-        font-size: 1.5rem;
+        margin: 0;
     }
 
     .content-paragraph {
-        font-size: 0.95rem;
-        padding: 0 16px;
+        padding: 0;
     }
 
     .hero-section {
         height: 200px;
     }
-}
 
-@media (max-width: 480px) {
-    .section-title {
-        font-size: 1.25rem;
+    .green-waste-wrapper {
+        padding: 0;
+    }
+
+    .green-waste-wrapper .content-paragraph {
+        padding: 0;
+    }
+    .steps-list {
+        padding: 0 0 0 40px;
     }
 }
+
 
 @media (max-width: 900px) {
     .content-block.second {

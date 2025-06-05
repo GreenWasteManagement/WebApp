@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="depositModal">
+    <div class="modal-bg">
+        <div class="modal">
+            <button class="modal-close" aria-label="Fechar"></button>
+            <h3 class="modal-title">Registar depósito</h3>
+            <form class="modal-form">
+                <div class="modal-row">
+                    <div style="flex:1;">
+                        <label class="modal-label" for="contentor">Contentor:</label>
+                        <select class="modal-select" id="contentor" required>
+                            <option value="A">Contentor A</option>
+                            <option value="B">Contentor B</option>
+                        </select>
+                    </div>
+                    <div style="flex:1;">
+                        <label class="modal-label" for="quantidade">Quantidade (Kg):</label>
+                        <input class="modal-input" type="number" id="quantidade" min="0" placeholder="" required>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="modal-btn-cancel">Cancelar</button>
+                    <button type="submit" class="modal-btn-save">Registar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

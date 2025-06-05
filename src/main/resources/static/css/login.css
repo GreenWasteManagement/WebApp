@@ -17,9 +17,12 @@
 }
 
 .login-title {
-    color: #15803d;
+    font-size: 32px;
+    font-weight: 600;
+    color: #057222;
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 32px;
+    border-bottom: 2px solid #15803d;
 }
 
 .error-message, .success-message {
@@ -125,26 +128,30 @@
 }
 
 .login-button {
-    width: 100%;
-    background-color: white;
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #ffffff;
     color: #004713;
-    align-self: center;
     border: none;
-    border-radius: 16px;
-    height: 48px;
-    max-width: 200px;
-    cursor: pointer;
-    transition: background-color 0.2s;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    transition: all 0.4s;
 }
 
 .login-button:hover {
-    background-color: #f9fafb;
+    background-color: #004713;
+    color: #ffffff;
+    cursor: pointer;
+    scale: 1.02;
+    box-shadow: 0 2px 2px 0 rgba(34, 34, 34, 0.25);
 }
 
 .register-link {
     text-align: center;
     margin-top: 1.5rem;
-    color: #15803d;
+    color: black;
 }
 
 .register-anchor {
@@ -154,4 +161,14 @@
 
 .register-anchor:hover {
     color: #166534;
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 16px;
+    }
+
+    .login-form-container {
+        width: 90%;
+    }
 }

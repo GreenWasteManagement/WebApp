@@ -40,6 +40,27 @@
     box-shadow: 0 2px 2px 0 rgba(34, 34, 34, 0.25);
 }
 
+.logout-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #ffffff;
+    color: #C03D3D;
+    border: none;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    transition: all 0.4s;
+}
+
+.logout-button:hover {
+    background-color: #C03D3D;
+    color: #ffffff;
+    cursor: pointer;
+    scale: 1.02;
+    box-shadow: 0 2px 2px 0 rgba(34, 34, 34, 0.25);
+}
+
 /* Profile Form Section */
 .profile-form-section {
     margin: 0 0 32px 0;
@@ -63,7 +84,7 @@
 }
 
 .form-group {
-    margin-bottom: 30px;
+    margin-bottom: 32px;
 }
 
 .form-group:last-child {
@@ -75,7 +96,7 @@
     font-size: 16px;
     font-weight: 500;
     color: #333333;
-    margin-bottom: 4px;
+    margin-bottom: 0;
 }
 
 /* Section Styles */
@@ -170,17 +191,23 @@
 /* Responsive Design */
 @media (max-width: 768px) {
     .container {
-        padding: 15px;
+        margin: 160px 0 32px 0;
+        padding: 0;
     }
 
     .profile-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 10px;
+        gap: 16px;
     }
 
     .form-row {
+        gap: 16px;
         flex-direction: column;
+    }
+
+    .form-group {
+        margin-bottom: 16px;
     }
 
     .form-column {
@@ -191,7 +218,7 @@
     .section-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 10px;
+        gap: 16px;
     }
 }
 

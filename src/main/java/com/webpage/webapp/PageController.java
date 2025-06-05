@@ -30,4 +30,9 @@ public class PageController {
     public String profile() {
         return "profile";
     }
+
+    @GetMapping("/rewards")
+    public String rewards() {
+        return "rewards";
+    }
 }
