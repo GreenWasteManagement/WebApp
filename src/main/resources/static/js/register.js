@@ -1,137 +1,123 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const showPasswordsCheckbox = document.getElementById('showPasswords');
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirmPassword');
     const registerForm = document.querySelector('.register-form');
+    const errorMessageDiv = document.querySelector('.error-message');
+    const successMessageDiv = document.querySelector('.success-message');
 
-    // Show/Hide passwords functionality
-    showPasswordsCheckbox.addEventListener('change', function() {
+    // Função para mostrar erros
+    function showError(message) {
+        errorMessageDiv.querySelector('.error-list').innerHTML = `<li>${message}</li>`;
+        errorMessageDiv.style.display = 'block';
+        successMessageDiv.style.display = 'none';
+    }
+
+    // Função para mostrar sucesso
+    function showSuccess(message) {
+        successMessageDiv.querySelector('p').textContent = message;
+        successMessageDiv.style.display = 'block';
+        errorMessageDiv.style.display = 'none';
+    }
+
+    // Mostrar/Esconder passwords
+    showPasswordsCheckbox.addEventListener('change', function () {
         const inputType = this.checked ? 'text' : 'password';
         passwordInput.type = inputType;
         confirmPasswordInput.type = inputType;
     });
 
-    // Password confirmation validation
+    // Validação de password
     function validatePasswordMatch() {
-        const password = passwordInput.value;
-        const confirmPassword = confirmPasswordInput.value;
-
-        if (confirmPassword && password !== confirmPassword) {
+        if (passwordInput.value !== confirmPasswordInput.value) {
             confirmPasswordInput.setCustomValidity('As palavras-passe não coincidem');
-        } else {
-            confirmPasswordInput.setCustomValidity('');
+            showError('As palavras-passe não coincidem');
+            return false;
         }
+        confirmPasswordInput.setCustomValidity('');
+        return true;
     }
 
-    passwordInput.addEventListener('input', validatePasswordMatch);
-    confirmPasswordInput.addEventListener('input', validatePasswordMatch);
+    // Formatação de dados
+    function formatPostalCode(postalCode) {
+        return postalCode.replace('-', '');
+    }
 
-    // Postal code formatting (Portuguese format: XXXX-XXX)
-    const postalCodeInput = document.getElementById('postalCode');
-    postalCodeInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
-        if (value.length >= 4) {
-            value = value.substring(0, 4) + '-' + value.substring(4, 7);
+    // Construção do payload
+    function buildPayload() {
+        return {
+            user: {
+                name: document.getElementById('fullName').value.trim(),
+                username: document.getElementById('username').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phoneNumber: document.getElementById('phoneNumber').value.trim(),
+                password: passwordInput.value.trim()
+            }, municipality: {
+                citizenCardCode: document.getElementById('citizenCardNumber').value.trim(),
+                nif: document.getElementById('nif').value.trim()
+            }, address: {
+                floorDetails: document.getElementById('floor').value.trim(),
+                floorNumber: parseInt(document.getElementById('floor').value) || 0,
+                doorNumber: parseInt(document.getElementById('doorNumber').value) || 0,
+                street: document.getElementById('street').value.trim()
+            }, postalCode: {
+                postalCode: formatPostalCode(document.getElementById('postalCode').value.trim()), county: "", // Preencher conforme necessidade
+                district: "" // Preencher conforme necessidade
+            }
+        };
+    }
+
+    // Envio do formulário
+    registerForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        // Validações básicas
+        if (!validatePasswordMatch()) return;
+
+        const payload = buildPayload();
+
+        try {
+            const response = await fetch('http://localhost:8080/api/users/create/municipality', {
+                method: 'POST', headers: {
+                    'Content-Type': 'application/json'
+                }, body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.message || 'Erro no registo');
+            }
+
+            showSuccess('Registo realizado com sucesso! Redirecionando...');
+            setTimeout(() => {
+                window.location.href = '/login';
+            }, 2000);
+
+        } catch (error) {
+            showError(error.message);
         }
-        e.target.value = value;
     });
 
-    // Phone number formatting (Portuguese mobile format)
-    const phoneInput = document.getElementById('phoneNumber');
-    phoneInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
-        if (value.length > 9) {
-            value = value.substring(0, 9);
-        }
-        e.target.value = value;
-    });
-
-    // Citizen card number formatting
-    const citizenCardInput = document.getElementById('citizenCardNumber');
-    citizenCardInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
-        if (value.length > 9) {
-            value = value.substring(0, 9);
-        }
-        e.target.value = value;
-    });
-
-    // NIF formatting
-    const nifInput = document.getElementById('nif');
-    nifInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
-        if (value.length > 9) {
-            value = value.substring(0, 9);
-        }
-        e.target.value = value;
-    });
-
-    // Form validation before submission
-    registerForm.addEventListener('submit', function(e) {
-        const requiredFields = registerForm.querySelectorAll('input[required]');
-        let isValid = true;
-
-        requiredFields.forEach(field => {
-            if (!field.value.trim()) {
-                isValid = false;
+    // Validações em tempo real
+    const validateField = (field, condition, errorMessage) => {
+        field.addEventListener('input', () => {
+            if (condition(field.value)) {
+                field.style.borderColor = '#16a34a';
+            } else {
                 field.style.borderColor = '#dc2626';
-            } else {
-                field.style.borderColor = '';
+                showError(errorMessage);
             }
         });
+    };
 
-        // Check password match
-        if (passwordInput.value !== confirmPasswordInput.value) {
-            isValid = false;
-            confirmPasswordInput.style.borderColor = '#dc2626';
-            alert('As palavras-passe não coincidem.');
-        }
+    // Validações específicas
+    validateField(document.getElementById('nif'), value => value.length === 9, 'NIF deve ter 9 dígitos');
 
-        // Validate NIF (basic check)
-        const nifValue = nifInput.value;
-        if (nifValue && nifValue.length !== 9) {
-            isValid = false;
-            nifInput.style.borderColor = '#dc2626';
-            alert('O NIF deve ter 9 dígitos.');
-        }
+    validateField(document.getElementById('citizenCardNumber'), value => value.length === 9, 'Nº Cartão Cidadão deve ter 9 dígitos');
 
-        // Validate citizen card number
-        const citizenCardValue = citizenCardInput.value;
-        if (citizenCardValue && citizenCardValue.length !== 9) {
-            isValid = false;
-            citizenCardInput.style.borderColor = '#dc2626';
-            alert('O número de cartão de cidadão deve ter 9 dígitos.');
-        }
+    validateField(document.getElementById('phoneNumber'), value => value.length === 9, 'Nº Telemóvel deve ter 9 dígitos');
 
-        // Validate phone number
-        const phoneValue = phoneInput.value;
-        if (phoneValue && phoneValue.length !== 9) {
-            isValid = false;
-            phoneInput.style.borderColor = '#dc2626';
-            alert('O número de telemóvel deve ter 9 dígitos.');
-        }
-
-        if (!isValid) {
-            e.preventDefault();
-        }
-    });
-
-    // Auto-focus on first field
+    // Auto-foco no primeiro campo
     document.getElementById('fullName').focus();
-
-    // Real-time validation feedback
-    const inputs = registerForm.querySelectorAll('input[required]');
-    inputs.forEach(input => {
-        input.addEventListener('blur', function() {
-            if (this.value.trim()) {
-                this.style.borderColor = '#16a34a';
-            } else {
-                this.style.borderColor = '#dc2626';
-            }
-        });
-
-        input.addEventListener('focus', function() {
-            this.style.borderColor = '';
-        });
-    });
 });

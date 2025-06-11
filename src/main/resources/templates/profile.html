@@ -4,151 +4,154 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Viana Circular | Perfil</title>
-    <link rel="icon" th:href="@{/images/app_logo_white.svg}" type="image/png" />
+    <link rel="icon" th:href="@{/images/app_logo_white.svg}" type="image/png"/>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/css/profile.css}">
 </head>
 <body>
 
-    <div th:insert="~{components/header :: header}"></div>
+<div th:insert="~{components/header :: header}"></div>
 
-    <div class="container">
+<div class="container">
+
+    <div th:replace="components/depositModal :: depositModal"></div>
+    <div th:replace="components/editProfileModal :: editProfileModal"></div>
 
 
-        <!-- Profile Header -->
-        <div class="profile-header">
-            <h2 class="profile-title">Perfil</h2>
-            <div style="display: flex; gap: 16px">
-                <a th:href="@{/profile/edit}" class="edit-button">Editar perfil</a>
-                <a class="logout-button">Terminar sessão</a>
-            </div>
+    <!-- Profile Header -->
+    <div class="profile-header">
+        <h2 class="profile-title">Perfil</h2>
+        <div style="display: flex; gap: 16px">
+            <a class="register-button" href="#" onclick="openEditProfileModal(); return false;">Editar Perfil</a>
+            <a class="logout-button">Terminar sessão</a>
         </div>
+    </div>
 
-        <!-- Profile Form Section -->
-        <div class="profile-form-section">
-            <div class="profile-form">
-                <!-- Two column layout -->
-                <div class="form-row">
-                    <div class="form-column">
-                        <div class="form-group">
-                            <label class="form-label">Nome:</label>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Telefone:</label>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Nº cartão cidadão:</label>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Morada:</label>
-                        </div>
+    <!-- Profile Form Section -->
+    <div class="profile-form-section">
+        <div class="profile-form">
+            <!-- Two column layout -->
+            <div class="form-row">
+                <div class="form-column">
+                    <div class="form-group">
+                        <label class="form-label">Nome:</label>
                     </div>
 
-                    <div class="form-column">
-                        <div class="form-group">
-                            <label class="form-label">Nome de utilizador:</label>
-                        </div>
+                    <div class="form-group">
+                        <label class="form-label">Telefone:</label>
+                    </div>
 
-                        <div class="form-group">
-                            <label class="form-label">Email:</label>
-                        </div>
+                    <div class="form-group">
+                        <label class="form-label">Nº cartão cidadão:</label>
+                    </div>
 
-                        <div class="form-group">
-                            <label class="form-label">NIF:</label>
-                        </div>
+                    <div class="form-group">
+                        <label class="form-label">Morada:</label>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <!-- My Buckets Section -->
-        <div class="section">
-            <div class="section-header">
-                <h2 class="section-title">Os meus baldes</h2>
-            </div>
-            <div class="section-content">
-                <!-- Dynamic content for buckets would go here -->
-                <div>
-                    <div class="item-row">
-                        <span>Balde</span>
-                        <span>Capacidade (Kg)</span>
-                        <span>Estado</span> <!-- TRUE SIGNIFICA ATIVO E FALSE INATIVO -->
+                <div class="form-column">
+                    <div class="form-group">
+                        <label class="form-label">Nome de utilizador:</label>
                     </div>
-                    <div class="empty-line"></div>
-                    <div class="item-row">
-                        <span>1234</span>
-                        <span>5</span>
-                        <span>Ativo</span>
-                    </div>
-                    <div class="empty-line"></div>
-                    <div class="item-row">
-                        <span>5633</span>
-                        <span>10</span>
-                        <span>Inativo</span>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- My Deposits Section -->
-        <div class="section">
-            <div class="section-header">
-                <h2 class="section-title">Os meus depósitos</h2>
-                <div style="display: flex; gap: 16px">
-                    <a class="register-button" th:href="@{/rewards}">Recompensas</a>
-                    <a class="register-button">Registar depósito</a>
-                </div>
-            </div>
-            <div class="section-content records-section">
-                <!-- Dynamic content for deposits would go here -->
-                <div id="deposits">
-                    <div class="item-row">
-                        <span>Data</span>
-                        <span>Quantidade</span>
-                        <span>Contentor</span>
+                    <div class="form-group">
+                        <label class="form-label">Email:</label>
                     </div>
-                    <div class="empty-line"></div>
-                    <div class="item-row">
-                        <span>2025-01-15</span>
-                        <span>3</span>
-                        <span>A</span>
-                    </div>
-                    <div class="empty-line"></div>
-                    <div class="item-row">
-                        <span>2025-02-03</span>
-                        <span>1</span>
-                        <span>B</span>
-                    </div>
-                    <div class="empty-line"></div>
-                    <div class="item-row">
-                        <span>2025-02-20</span>
-                        <span>2</span>
-                        <span>C</span>
-                    </div>
-                    <div class="empty-line"></div>
-                    <div class="item-row">
-                        <span>2025-03-05</span>
-                        <span>1</span>
-                        <span>A</span>
-                    </div>
-                    <div class="empty-line"></div>
-                    <!-- …more rows… -->
-                </div>
 
-                <!-- Stats container where the chart will be drawn -->
-                <div id="stats">
-                    <!-- 1) Insert a <canvas> for Chart.js: -->
-                    <canvas id="depositsChart" style="max-width: none; border-radius: 32px;"></canvas>
+                    <div class="form-group">
+                        <label class="form-label">NIF:</label>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div th:insert="~{components/footer :: footer}"></div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script th:src="@{/js/profile.js}"></script>
+    <!-- My Buckets Section -->
+    <div class="section">
+        <div class="section-header">
+            <h2 class="section-title">Os meus baldes</h2>
+        </div>
+        <div class="section-content">
+            <!-- Dynamic content for buckets would go here -->
+            <div>
+                <div class="item-row">
+                    <span>Balde</span>
+                    <span>Capacidade (Kg)</span>
+                    <span>Estado</span> <!-- TRUE SIGNIFICA ATIVO E FALSE INATIVO -->
+                </div>
+                <div class="empty-line"></div>
+                <div class="item-row">
+                    <span>1234</span>
+                    <span>5</span>
+                    <span>Ativo</span>
+                </div>
+                <div class="empty-line"></div>
+                <div class="item-row">
+                    <span>5633</span>
+                    <span>10</span>
+                    <span>Inativo</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Deposits Section -->
+    <div class="section">
+        <div class="section-header">
+            <h2 class="section-title">Os meus depósitos</h2>
+            <div style="display: flex; gap: 16px">
+                <a class="register-button" th:href="@{/rewards}">Recompensas</a>
+                <a class="register-button" href="#" onclick="openDepositModal(); return false;">Registar depósito</a>
+            </div>
+        </div>
+        <div class="section-content records-section">
+            <!-- Dynamic content for deposits would go here -->
+            <div id="deposits">
+                <div class="item-row">
+                    <span>Data</span>
+                    <span>Quantidade</span>
+                    <span>Contentor</span>
+                </div>
+                <div class="empty-line"></div>
+                <div class="item-row">
+                    <span>2025-01-15</span>
+                    <span>3</span>
+                    <span>A</span>
+                </div>
+                <div class="empty-line"></div>
+                <div class="item-row">
+                    <span>2025-02-03</span>
+                    <span>1</span>
+                    <span>B</span>
+                </div>
+                <div class="empty-line"></div>
+                <div class="item-row">
+                    <span>2025-02-20</span>
+                    <span>2</span>
+                    <span>C</span>
+                </div>
+                <div class="empty-line"></div>
+                <div class="item-row">
+                    <span>2025-03-05</span>
+                    <span>1</span>
+                    <span>A</span>
+                </div>
+                <div class="empty-line"></div>
+                <!-- …more rows… -->
+            </div>
+
+            <!-- Stats container where the chart will be drawn -->
+            <div id="stats">
+                <!-- 1) Insert a <canvas> for Chart.js: -->
+                <canvas id="depositsChart" style="max-width: none; border-radius: 32px;"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:insert="~{components/footer :: footer}"></div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script th:src="@{/js/profile.js}"></script>
 </body>
 </html>

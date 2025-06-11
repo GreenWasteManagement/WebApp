@@ -1,7 +1,39 @@
+function openDepositModal() {
+    document.querySelector('.openDepositModal').style.display = 'flex';
+}
+
+function openEditProfileModal() {
+    document.querySelector('.openEditProfileModal').style.display = 'flex';
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Deposit Modal
+    document.querySelector('.openDepositModal .modal-close').onclick = function () {
+        document.querySelector('.openDepositModal').style.display = 'none';
+    };
+    document.querySelector('.openDepositModal .modal-btn-cancel').onclick = function () {
+        document.querySelector('.openDepositModal').style.display = 'none';
+    };
+
+    // Edit Profile Modal
+    document.querySelector('.openEditProfileModal .modal-close').onclick = function () {
+        document.querySelector('.openEditProfileModal').style.display = 'none';
+    };
+    document.querySelector('.openEditProfileModal .modal-btn-cancel').onclick = function () {
+        document.querySelector('.openEditProfileModal').style.display = 'none';
+    };
+});
+
+
 // STAT GRAPH LOGIC
 document.addEventListener('DOMContentLoaded', function () {
+
+    // Function to DepositModal:
+
+
     // a) Prepare an array of length 12, initialized to zero
     const monthlyCounts = new Array(12).fill(0);
+
 
     // b) Select all .item-row inside #deposits
     const rows = document.querySelectorAll('#deposits .item-row');
@@ -24,69 +56,43 @@ document.addEventListener('DOMContentLoaded', function () {
     const yAxisMax = highest + 1;
 
     // c) Define month labels (you can change to localized names as needed)
-    const monthLabels = [
-        'Jan', 'Fev', 'Mar', 'Abr',
-        'Mai', 'Jun', 'Jul', 'Ago',
-        'Set', 'Out', 'Nov', 'Dez'
-    ];
+    const monthLabels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
 
     // d) Get the 2D context of the <canvas>
     const ctx = document.getElementById('depositsChart').getContext('2d');
 
     // e) Create a bar chart with Chart.js
     new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: monthLabels,
-            datasets: [{
-                backgroundColor: '#057222',
-                borderRadius: 6,   // slightly narrower bars
-                categoryPercentage: 0.7,
-                data: monthlyCounts
+        type: 'bar', data: {
+            labels: monthLabels, datasets: [{
+                backgroundColor: '#057222', borderRadius: 6,   // slightly narrower bars
+                categoryPercentage: 0.7, data: monthlyCounts
             }]
-        },
-        options: {
-            responsive: true,
-            scales: {
+        }, options: {
+            responsive: true, scales: {
                 y: {
-                    beginAtZero: true,
-                    grid: {
-                        color: '#d1d5db',
-                        borderDash: [4, 4]
-                    },
-                    ticks: {
-                        stepSize: 1,
-                        color: '#333333',
-                        font: { size: 12, weight: '500' }
-                    },
-                    title: {
+                    beginAtZero: true, grid: {
+                        color: '#d1d5db', borderDash: [4, 4]
+                    }, ticks: {
+                        stepSize: 1, color: '#333333', font: {size: 12, weight: '500'}
+                    }, title: {
                         display: false
-                    },
-                    max: yAxisMax
-                },
-                x: {
+                    }, max: yAxisMax
+                }, x: {
                     grid: {
                         display: false
-                    },
-                    ticks: {
-                        color: '#333333',
-                        font: { size: 12, weight: '500' }
-                    },
-                    title: {
+                    }, ticks: {
+                        color: '#333333', font: {size: 12, weight: '500'}
+                    }, title: {
                         display: false
                     }
                 }
-            },
-            plugins: {
+            }, plugins: {
                 legend: {
                     display: false
-                },
-                tooltip: {
-                    backgroundColor: 'rgba(5, 114, 34, 0.9)',
-                    titleColor: '#fff',
-                    bodyColor: '#fff',
-                    callbacks: {
-                        label: function(context) {
+                }, tooltip: {
+                    backgroundColor: 'rgba(5, 114, 34, 0.9)', titleColor: '#fff', bodyColor: '#fff', callbacks: {
+                        label: function (context) {
                             return ` ${context.parsed.y} depósitos`;
                         }
                     }

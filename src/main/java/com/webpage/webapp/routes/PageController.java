@@ -1,4 +1,4 @@
-package com.webpage.webapp;
+package com.webpage.webapp.routes;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,4 +35,5 @@ public class PageController {
     public String rewards() {
         return "rewards";
     }
+
 }
