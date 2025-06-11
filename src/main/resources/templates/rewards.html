@@ -7,6 +7,7 @@
     <link rel="icon" th:href="@{/images/app_logo_white.svg}" type="image/png" />
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/css/rewards.css}">
+    <script th:src="@{/js/rewards.js}"></script>
 </head>
 <body>
 
@@ -16,104 +17,22 @@
         <h2 class="page-title">As minhas recompensas</h2>
 
         <div class="rewards-container">
-            <!-- Left side - Static content -->
             <div class="total-deposited">
                 <h2 class="deposited-title">Quantidade total depositada:</h2>
-                <div class="deposited-amount" th:text="${totalDeposited} + 'Kg'">32Kg</div>
+                <div class="deposited-amount" id="totalDeposited">0Kg</div>
                 <p class="deposited-info">
                     Esta quantidade é calculada a partir das quantidades depositadas ao longo de todos os depósitos realizados por si.
                 </p>
             </div>
 
-            <!-- Right side - Scrollable rewards -->
-            <div class="rewards-list">
-                <!-- Repeat for each reward -->
-                <div class="reward-card" th:each="reward : ${rewards}">
-                    <div class="reward-description" th:text="${reward.description}">
-                        Vale 5€ de desconto em qualquer compra no Continente
-                    </div>
-                    <div class="progress-container">
-                        <div class="progress-bar" th:style="'width: ' + ${reward.progress} + '%'"></div>
-                    </div>
-                    <div class="progress-percentage" th:text="${reward.progress} + '%'">75%</div>
-                </div>
-
-                <!-- Static examples for preview -->
-                <div th:if="${rewards == null || rewards.empty}">
-                    <div class="reward-card">
-                        <div class="reward-description">
-                            Vale 5€ de desconto em qualquer compra no Continente
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 75%"></div>
-                        </div>
-                        <div class="progress-percentage">75%</div>
-                    </div>
-
-                    <div class="reward-card">
-                        <div class="reward-description">
-                            Vale 5€ de desconto em qualquer compra no Continente
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 75%"></div>
-                        </div>
-                        <div class="progress-percentage">75%</div>
-                    </div>
-
-                    <div class="reward-card">
-                        <div class="reward-description">
-                            Vale 5€ de desconto em qualquer compra no Continente
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 75%"></div>
-                        </div>
-                        <div class="progress-percentage">75%</div>
-                    </div>
-
-                    <div class="reward-card">
-                        <div class="reward-description">
-                            Vale 5€ de desconto em qualquer compra no Continente
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 75%"></div>
-                        </div>
-                        <div class="progress-percentage">75%</div>
-                    </div>
-
-                    <div class="reward-card">
-                        <div class="reward-description">
-                            Vale 5€ de desconto em qualquer compra no Continente
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 75%"></div>
-                        </div>
-                        <div class="progress-percentage">75%</div>
-                    </div>
-
-                    <div class="reward-card">
-                        <div class="reward-description">
-                            Vale 5€ de desconto em qualquer compra no Continente
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 75%"></div>
-                        </div>
-                        <div class="progress-percentage">75%</div>
-                    </div>
-
-                    <div class="reward-card">
-                        <div class="reward-description">
-                            Vale 5€ de desconto em qualquer compra no Continente
-                        </div>
-                        <div class="progress-container">
-                            <div class="progress-bar" style="width: 75%"></div>
-                        </div>
-                        <div class="progress-percentage">75%</div>
-                    </div>
-                </div>
+            <div class="rewards-list" id="rewardsList">
+                <!-- Cards vão ser inseridos aqui pelo JS -->
             </div>
         </div>
     </div>
 
+
     <div th:insert="~{components/footer :: footer}"></div>
+
 </body>
 </html>

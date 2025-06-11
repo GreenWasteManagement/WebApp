@@ -30,37 +30,40 @@
     <!-- Profile Form Section -->
     <div class="profile-form-section">
         <div class="profile-form">
-            <!-- Two column layout -->
             <div class="form-row">
                 <div class="form-column">
                     <div class="form-group">
-                        <label class="form-label">Nome:</label>
-                    </div>
+                        <label class="form-label">Nome: <span class="form-value" data-field="name"></span></label>
 
-                    <div class="form-group">
-                        <label class="form-label">Telefone:</label>
                     </div>
-
                     <div class="form-group">
-                        <label class="form-label">Nº cartão cidadão:</label>
+                        <label class="form-label">Telefone: <span class="form-value"
+                                                                  data-field="phoneNumber"></span></label>
+
                     </div>
-
                     <div class="form-group">
-                        <label class="form-label">Morada:</label>
+                        <label class="form-label">Nº cartão cidadão: <span class="form-value"
+                                                                           data-field="citizenCard"></span>
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Morada: <span class="form-value" data-field="address"></span>
+                        </label>
                     </div>
                 </div>
-
                 <div class="form-column">
                     <div class="form-group">
-                        <label class="form-label">Nome de utilizador:</label>
-                    </div>
+                        <label class="form-label">Nome de utilizador: <span class="form-value"
+                                                                            data-field="username"></span></label>
 
-                    <div class="form-group">
-                        <label class="form-label">Email:</label>
                     </div>
-
                     <div class="form-group">
-                        <label class="form-label">NIF:</label>
+                        <label class="form-label">Email: <span class="form-value" data-field="email"></span></label>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">NIF: <span class="form-value" data-field="nif"></span></label>
+
                     </div>
                 </div>
             </div>
@@ -73,28 +76,12 @@
             <h2 class="section-title">Os meus baldes</h2>
         </div>
         <div class="section-content">
-            <!-- Dynamic content for buckets would go here -->
-            <div>
-                <div class="item-row">
-                    <span>Balde</span>
-                    <span>Capacidade (Kg)</span>
-                    <span>Estado</span> <!-- TRUE SIGNIFICA ATIVO E FALSE INATIVO -->
-                </div>
-                <div class="empty-line"></div>
-                <div class="item-row">
-                    <span>1234</span>
-                    <span>5</span>
-                    <span>Ativo</span>
-                </div>
-                <div class="empty-line"></div>
-                <div class="item-row">
-                    <span>5633</span>
-                    <span>10</span>
-                    <span>Inativo</span>
-                </div>
+            <div id="buckets-list">
+                <!-- Dynamic content -->
             </div>
         </div>
     </div>
+
 
     <!-- My Deposits Section -->
     <div class="section">

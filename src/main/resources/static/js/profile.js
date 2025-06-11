@@ -7,91 +7,185 @@ function openEditProfileModal() {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Deposit Modal
-    document.querySelector('.openDepositModal .modal-close').onclick = function () {
-        document.querySelector('.openDepositModal').style.display = 'none';
-    };
-    document.querySelector('.openDepositModal .modal-btn-cancel').onclick = function () {
-        document.querySelector('.openDepositModal').style.display = 'none';
-    };
+    // Modal handling
+    document.querySelector('.openDepositModal .modal-close').onclick = closeModals;
+    document.querySelector('.openDepositModal .modal-btn-cancel').onclick = closeModals;
+    document.querySelector('.openEditProfileModal .modal-close').onclick = closeModals;
+    document.querySelector('.openEditProfileModal .modal-btn-cancel').onclick = closeModals;
 
-    // Edit Profile Modal
-    document.querySelector('.openEditProfileModal .modal-close').onclick = function () {
-        document.querySelector('.openEditProfileModal').style.display = 'none';
-    };
-    document.querySelector('.openEditProfileModal .modal-btn-cancel').onclick = function () {
-        document.querySelector('.openEditProfileModal').style.display = 'none';
-    };
+    // Main data loading
+    loadUserData();
 });
 
+// JWT handling
+function decodeJWT() {
+    const token = localStorage.getItem('jwt_token');
+    if (!token) {
+        window.location.href = '/login';
+        return null;
+    }
 
-// STAT GRAPH LOGIC
-document.addEventListener('DOMContentLoaded', function () {
+    try {
+        return JSON.parse(atob(token.split('.')[1]));
+    } catch (e) {
+        console.error('Erro a decodificar JWT:', e);
+        window.location.href = '/login';
+        return null;
+    }
+}
 
-    // Function to DepositModal:
+// API functions
+async function loadUserData() {
+    const payload = decodeJWT();
+    if (!payload) return;
 
+    try {
+        // Só este endpoint mudou para POST
+        const userRes = await fetch(`http://localhost:8080/api/users/get/municipality/${payload.id}`, {
+            method: 'POST', headers: {
+                'Content-Type': 'application/json', 'accept': '*/*'
+            }, body: ''
+        });
 
-    // a) Prepare an array of length 12, initialized to zero
-    const monthlyCounts = new Array(12).fill(0);
+        // Os outros continuam GET
+        const [bucketsRes, depositsRes] = await Promise.all([fetch(`http://localhost:8080/api/buckets/buckets-municipalities/${payload.id}`), fetch(`http://localhost:8080/api/buckets/deposits/municipality/${payload.id}`)]);
 
+        const userData = await userRes.json();
+        const bucketsData = await bucketsRes.json();
+        const depositsData = await depositsRes.json();
 
-    // b) Select all .item-row inside #deposits
-    const rows = document.querySelectorAll('#deposits .item-row');
+        populateProfile(userData);
+        populateBuckets(bucketsData.bucketMunicipalities);
+        populateDeposits(depositsData);
+    } catch (error) {
+        console.error('Erro a carregar dados:', error);
+    }
+}
 
-    rows.forEach((row, index) => {
-        // Skip the very first row if it is the header ("Data", "Quantidade", "Contentor")
-        if (index === 0) return;
+// Data population
+function populateProfile(data) {
+    console.log(data);
+    const fields = {
+        'name': data.user.name,
+        'username': data.user.username,
+        'email': data.user.email,
+        'phoneNumber': data.user.phoneNumber,
+        'citizenCard': data.municipality.citizenCardCode,
+        'nif': data.municipality.nif,
+        'address': `${data.address.street}, ${data.address.doorNumber}`
+    };
 
-        const dateText = row.querySelector('span').textContent.trim();
-        const parsedDate = new Date(dateText);
+    Object.entries(fields).forEach(([key, value]) => {
+        document.querySelector(`[data-field="${key}"]`).textContent = value;
+    });
+}
 
-        // Only count if parsing yields a valid date
-        if (!isNaN(parsedDate)) {
-            const monthIndex = parsedDate.getMonth(); // 0 = Jan, 1 = Feb, … 11 = Dec
-            monthlyCounts[monthIndex]++;
-        }
+async function populateBuckets(associations) {
+    const container = document.querySelector('#buckets-list');
+    container.innerHTML = '';
+
+    for (const assoc of associations) {
+        const res = await fetch(`http://localhost:8080/api/buckets/${assoc.bucketId}`);
+        const {bucket} = await res.json();
+
+        const html = `
+            <div class="item-row">
+                <span>${bucket.id}</span>
+                <span>${bucket.capacity / 1000} Kg</span>
+                <span>${assoc.status ? 'Ativo' : 'Inativo'}</span>
+            </div>
+            <div class="empty-line"></div>
+        `;
+        container.insertAdjacentHTML('beforeend', html);
+    }
+}
+
+function populateDeposits(deposits) {
+    const container = document.querySelector('#deposits');
+    container.innerHTML = `
+        <div class="item-row">
+            <span>Data</span>
+            <span>Quantidade</span>
+            <span>Contentor</span>
+        </div>
+        <div class="empty-line"></div>
+    `;
+
+    deposits.forEach(deposit => {
+        const html = `
+            <div class="item-row">
+                <span>${new Date(deposit.depositTimestamp).toLocaleDateString('pt-PT')}</span>
+                <span>${deposit.depositAmount} Kg</span>
+                <span>${deposit.container.id}</span>
+            </div>
+            <div class="empty-line"></div>
+        `;
+        container.insertAdjacentHTML('beforeend', html);
     });
 
+    updateChart(deposits);
+}
+
+// Chart logic
+function updateChart(deposits) {
+    const monthlyCounts = new Array(12).fill(0);
+
+    deposits.forEach(deposit => {
+        const month = new Date(deposit.depositTimestamp).getMonth();
+        monthlyCounts[month]++;
+    });
+
+    // Define os labels dos meses
+    const monthLabels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+    // Calcula o máximo do eixo Y
     const highest = Math.max(...monthlyCounts);
     const yAxisMax = highest + 1;
 
-    // c) Define month labels (you can change to localized names as needed)
-    const monthLabels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
-
-    // d) Get the 2D context of the <canvas>
     const ctx = document.getElementById('depositsChart').getContext('2d');
-
-    // e) Create a bar chart with Chart.js
     new Chart(ctx, {
-        type: 'bar', data: {
-            labels: monthLabels, datasets: [{
-                backgroundColor: '#057222', borderRadius: 6,   // slightly narrower bars
-                categoryPercentage: 0.7, data: monthlyCounts
+        type: 'bar',
+        data: {
+            labels: monthLabels,
+            datasets: [{
+                backgroundColor: '#057222',
+                borderRadius: 6,
+                categoryPercentage: 0.7,
+                data: monthlyCounts
             }]
-        }, options: {
-            responsive: true, scales: {
+        },
+        options: {
+            responsive: true,
+            scales: {
                 y: {
-                    beginAtZero: true, grid: {
-                        color: '#d1d5db', borderDash: [4, 4]
-                    }, ticks: {
-                        stepSize: 1, color: '#333333', font: {size: 12, weight: '500'}
-                    }, title: {
-                        display: false
-                    }, max: yAxisMax
-                }, x: {
+                    beginAtZero: true,
                     grid: {
-                        display: false
-                    }, ticks: {
-                        color: '#333333', font: {size: 12, weight: '500'}
-                    }, title: {
-                        display: false
-                    }
+                        color: '#d1d5db',
+                        borderDash: [4, 4]
+                    },
+                    ticks: {
+                        stepSize: 1,
+                        color: '#333333',
+                        font: { size: 12, weight: '500' }
+                    },
+                    title: { display: false },
+                    max: yAxisMax
+                },
+                x: {
+                    grid: { display: false },
+                    ticks: {
+                        color: '#333333',
+                        font: { size: 12, weight: '500' }
+                    },
+                    title: { display: false }
                 }
-            }, plugins: {
-                legend: {
-                    display: false
-                }, tooltip: {
-                    backgroundColor: 'rgba(5, 114, 34, 0.9)', titleColor: '#fff', bodyColor: '#fff', callbacks: {
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(5, 114, 34, 0.9)',
+                    titleColor: '#fff',
+                    bodyColor: '#fff',
+                    callbacks: {
                         label: function (context) {
                             return ` ${context.parsed.y} depósitos`;
                         }
@@ -100,4 +194,11 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     });
-});
+}
+
+
+function closeModals() {
+    document.querySelectorAll('.modal-bg').forEach(modal => {
+        modal.style.display = 'none';
+    });
+}
