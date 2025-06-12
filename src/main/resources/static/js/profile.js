@@ -17,6 +17,16 @@ document.addEventListener('DOMContentLoaded', function () {
     loadUserData();
 });
 
+function clearStorageAndRedirect() {
+    // Apaga todo o localStorage
+    localStorage.clear();
+
+    // Redireciona para o link desejado
+    window.location.href = 'http://localhost:8081/';
+}
+
+
+
 // JWT handling
 function decodeJWT() {
     const token = localStorage.getItem('jwt_token');
@@ -165,22 +175,22 @@ function updateChart(deposits) {
                     ticks: {
                         stepSize: 1,
                         color: '#333333',
-                        font: { size: 12, weight: '500' }
+                        font: {size: 12, weight: '500'}
                     },
-                    title: { display: false },
+                    title: {display: false},
                     max: yAxisMax
                 },
                 x: {
-                    grid: { display: false },
+                    grid: {display: false},
                     ticks: {
                         color: '#333333',
-                        font: { size: 12, weight: '500' }
+                        font: {size: 12, weight: '500'}
                     },
-                    title: { display: false }
+                    title: {display: false}
                 }
             },
             plugins: {
-                legend: { display: false },
+                legend: {display: false},
                 tooltip: {
                     backgroundColor: 'rgba(5, 114, 34, 0.9)',
                     titleColor: '#fff',
