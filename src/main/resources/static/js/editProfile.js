@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const isValid = await isVianaDoCasteloPostalCode(codigoPostal);
         if (!isValid) {
-            alert('The postal code does not belong to the municipality of Viana do Castelo.');
+            alert('O Código Postal não pertence a Viana do Castelo. Por favor insira um Código Postal Válido');
             return;
         }
 
@@ -101,10 +101,10 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             if (response.ok) {
-                alert('Profile updated successfully!');
+                alert('Perfil atualizado com sucesso!');
                 window.location.reload();
             } else {
-                alert('Error updating profile');
+                alert('Erro a atualizar Perfil !');
             }
         } catch (error) {
             console.error('Error:', error);

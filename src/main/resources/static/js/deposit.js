@@ -39,9 +39,9 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
 
         if (res.ok) {
-            alert('Deposit registered successfully!');
+            alert('Depósito Registado com sucesso !');
         } else {
-            alert('Error registering deposit');
+            alert('Erro a Registar o depósito !');
         }
         window.location.reload();
     });
