@@ -37,8 +37,13 @@
                         <input class="modal-input" id="nif" type="text">
                     </div>
                     <div style="flex:1;">
-                        <label class="modal-label" for="tipo">Tipo utilizador:</label>
-                        <input class="modal-input" id="tipo" type="text">
+                        <label class="modal-label" for="cod1">Código postal:</label>
+                        <div style="display: flex; flex-direction: row; gap: 8px;">
+                            <input class="modal-input" data-postal-code-id="" id="cod1" maxlength="4" style="width:48%;"
+                                   type="text">
+                            <span style="align-self:center;">-</span>
+                            <input class="modal-input" id="cod2" maxlength="3" style="width:48%;" type="text">
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -59,15 +64,7 @@
                     </div>
                 </div>
                 <div class="modal-row" style="align-items: flex-end;">
-                    <div style="flex:1;">
-                        <label class="modal-label" for="cod1">Código postal:</label>
-                        <div style="display: flex; flex-direction: row; gap: 8px;">
-                            <input class="modal-input" data-postal-code-id="" id="cod1" maxlength="4" style="width:48%;"
-                                   type="text">
-                            <span style="align-self:center;">-</span>
-                            <input class="modal-input" id="cod2" maxlength="3" style="width:48%;" type="text">
-                        </div>
-                    </div>
+
                     <div style="flex:1;"></div>
                 </div>
                 <div class="modal-actions">
