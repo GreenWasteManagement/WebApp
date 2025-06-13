@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function getLastEvent(events, type) {
-        if (!events?.length) return 'Nenhum registro';
+        if (!events?.length) return 'Nenhum registo';
         const last = events.reduce((a, b) =>
             new Date(a[`${type}Timestamp`]) > new Date(b[`${type}Timestamp`]) ? a : b
         );
