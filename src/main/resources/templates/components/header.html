@@ -3,17 +3,17 @@
 <div th:fragment="header">
     <header class="header">
         <div class="header-container">
-            <a th:href="@{/}" class="logo-section">
-                <img class="logo" th:src="@{/images/app_logo_white.svg}" alt="">
+            <a class="logo-section" th:href="@{/}">
+                <img alt="" class="logo" th:src="@{/images/app_logo_white.svg}">
                 <h1>Viana Circular</h1>
             </a>
             <nav class="navigation">
-                <a th:href="@{/}" class="nav-link">Página inicial</a>
-                <a th:href="@{/campaign}" class="nav-link-mobile campaign"></a>
-                <a th:href="@{/profile}" class="nav-link-mobile profile"></a>
-                <a th:href="@{/campaign}" class="nav-link">A campanha</a>
-                <a th:href="@{/profile}" class="nav-link">Perfil</a>
-                <a th:href="@{/login}" class="nav-link">Iniciar Sessão</a>
+                <a class="nav-link" th:href="@{/}">Página inicial</a>
+                <a class="nav-link-mobile campaign" th:href="@{/campaign}"></a>
+                <a class="nav-link-mobile profile" th:href="@{/profile}"></a>
+                <a class="nav-link" th:href="@{/campaign}">A campanha</a>
+                <a class="nav-link" th:href="@{/profile}">Perfil</a>
+                <a class="nav-link" th:href="@{/login}">Iniciar Sessão</a>
             </nav>
         </div>
     </header>

@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 street: document.getElementById('street').value.trim()
             }, postalCode: {
                 postalCode: formatPostalCode(document.getElementById('postalCode').value.trim()), county: "", // Preencher conforme necessidade
-                district: "" // Preencher conforme necessidade
+                district: ""
             }
         };
     }

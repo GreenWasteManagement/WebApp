@@ -18,14 +18,12 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function clearStorageAndRedirect() {
-    // Apaga todo o localStorage
+    // Clear all localStorage
     localStorage.clear();
 
-    // Redireciona para o link desejado
+    // Redirect to the desired link
     window.location.href = 'http://localhost:8081/';
 }
-
-
 
 // JWT handling
 function decodeJWT() {
@@ -38,7 +36,7 @@ function decodeJWT() {
     try {
         return JSON.parse(atob(token.split('.')[1]));
     } catch (e) {
-        console.error('Erro a decodificar JWT:', e);
+        console.error('Error decoding JWT:', e);
         window.location.href = '/login';
         return null;
     }
@@ -50,15 +48,21 @@ async function loadUserData() {
     if (!payload) return;
 
     try {
-        // Só este endpoint mudou para POST
+        // Only this endpoint changed to POST
         const userRes = await fetch(`http://localhost:8080/api/users/get/municipality/${payload.id}`, {
-            method: 'POST', headers: {
-                'Content-Type': 'application/json', 'accept': '*/*'
-            }, body: ''
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'accept': '*/*'
+            },
+            body: ''
         });
 
-        // Os outros continuam GET
-        const [bucketsRes, depositsRes] = await Promise.all([fetch(`http://localhost:8080/api/buckets/buckets-municipalities/${payload.id}`), fetch(`http://localhost:8080/api/buckets/deposits/municipality/${payload.id}`)]);
+        // The others are still GET
+        const [bucketsRes, depositsRes] = await Promise.all([
+            fetch(`http://localhost:8080/api/buckets/buckets-municipalities/${payload.id}`),
+            fetch(`http://localhost:8080/api/buckets/deposits/municipality/${payload.id}`)
+        ]);
 
         const userData = await userRes.json();
         const bucketsData = await bucketsRes.json();
@@ -68,7 +72,7 @@ async function loadUserData() {
         populateBuckets(bucketsData.bucketMunicipalities);
         populateDeposits(depositsData);
     } catch (error) {
-        console.error('Erro a carregar dados:', error);
+        console.error('Error loading data:', error);
     }
 }
 
@@ -114,9 +118,9 @@ function populateDeposits(deposits) {
     const container = document.querySelector('#deposits');
     container.innerHTML = `
         <div class="item-row">
-            <span>Data</span>
-            <span>Quantidade</span>
-            <span>Contentor</span>
+            <span>Date</span>
+            <span>Quantity</span>
+            <span>Container</span>
         </div>
         <div class="empty-line"></div>
     `;
@@ -145,9 +149,9 @@ function updateChart(deposits) {
         monthlyCounts[month]++;
     });
 
-    // Define os labels dos meses
+    // Define the month labels
     const monthLabels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
-    // Calcula o máximo do eixo Y
+    // Calculate the maximum Y-axis value
     const highest = Math.max(...monthlyCounts);
     const yAxisMax = highest + 1;
 
@@ -205,7 +209,6 @@ function updateChart(deposits) {
         }
     });
 }
-
 
 function closeModals() {
     document.querySelectorAll('.modal-bg').forEach(modal => {

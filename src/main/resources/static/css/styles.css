@@ -263,14 +263,17 @@ div.leaflet-control-attribution.leaflet-control {
 
 .modal-bg {
     position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background: rgba(0,0,0,0.7);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 10000;
 }
+
 .modal {
     background: #E2E2E2;
     border-radius: 32px;
@@ -283,6 +286,7 @@ div.leaflet-control-attribution.leaflet-control {
     overflow-y: scroll;
     scrollbar-width: none;
 }
+
 .modal-close {
     position: absolute;
     top: 32px;
@@ -302,40 +306,47 @@ div.leaflet-control-attribution.leaflet-control {
     justify-content: center;
     transition: background 0.2s;
 }
+
 .modal-close:hover {
     background-color: #b82929;
     scale: 1.02;
 }
+
 .modal-title {
     position: absolute;
     top: 32px;
     left: 32px;
     color: #000000;
 }
+
 .modal-form {
     margin-top: 64px;
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
+
 .modal-row {
     display: flex;
     flex-direction: row;
     gap: 16px;
     width: 100%;
 }
+
 .modal-label {
     font-size: 1rem;
     color: #333;
     margin-bottom: 8px;
     display: block;
 }
+
 .modal-row {
     display: flex;
     flex-direction: row;
     gap: 16px;
     width: 100%;
 }
+
 .modal-input, .modal-select {
     width: 100%;
     padding: 8px 16px;
@@ -348,15 +359,18 @@ div.leaflet-control-attribution.leaflet-control {
     outline: none;
     transition: box-shadow 0.2s;
 }
+
 .modal-input:focus, .modal-select:focus {
     box-shadow: 0 0 0 2px #a7e6b6;
 }
+
 .modal-actions {
     display: flex;
     justify-content: flex-end;
     gap: 16px;
     margin-top: 16px;
 }
+
 .modal-btn-save {
     display: inline-block;
     padding: 8px 16px;
@@ -405,21 +419,26 @@ div.leaflet-control-attribution.leaflet-control {
         padding: 16px;
         min-width: 0;
     }
-    .modal-close{
+
+    .modal-close {
         top: 16px;
         right: 16px;
     }
-    .modal-title{
+
+    .modal-title {
         top: 16px;
         left: 16px;
     }
+
     .modal-row {
         flex-direction: column;
         gap: 8px;
     }
+
     .modal-actions {
         gap: 8px;
     }
+
     .modal-row {
         flex-direction: column;
         gap: 16px;

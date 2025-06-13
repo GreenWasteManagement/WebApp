@@ -1,13 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Initialize the map centered on Viana do Castelo
     const map = L.map("map").setView([41.6938, -8.8318], 13);
 
-    // Configuração do mapa
+    // Map configuration
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         maxZoom: 18,
     }).addTo(map);
 
-    // Ícone personalizado para os contentores
+    // Custom icon for containers
     const containerIcon = L.divIcon({
         className: "container-marker",
         html: `
@@ -33,10 +34,10 @@ document.addEventListener("DOMContentLoaded", function () {
         popupAnchor: [0, -15],
     });
 
-    // Função robusta para conversão de coordenadas
+    // Robust function to parse coordinates
     function parseLocalization(localizationString) {
         try {
-            // Remove todos os caracteres não numéricos exceto vírgula e ponto
+            // Remove all non-numeric characters except comma, dot, and hyphen
             const cleanString = localizationString.replace(/[^\d.,-]/g, '');
             const [lat, lng] = cleanString.split(',').map(Number);
 
@@ -45,33 +46,35 @@ document.addEventListener("DOMContentLoaded", function () {
                 longitude: lng || 0
             };
         } catch (e) {
-            console.error('Erro na conversão:', localizationString, e);
-            return { latitude: 0, longitude: 0 };
+            console.error('Error parsing coordinates:', localizationString, e);
+            return {latitude: 0, longitude: 0};
         }
     }
 
-    // Função para buscar e atualizar dados
+    // Function to fetch and update map data
     function updateMapData() {
         fetch('http://localhost:8080/api/containers')
             .then(response => response.json())
             .then(data => {
+                // Remove existing markers
                 map.eachLayer(layer => {
                     if (layer instanceof L.Marker) map.removeLayer(layer);
                 });
 
+                // Add new markers
                 data.containers.forEach(container => {
                     const coords = parseLocalization(container.localization);
                     const popup = createPopupContent(container);
 
-                    L.marker([coords.latitude, coords.longitude], { icon: containerIcon })
+                    L.marker([coords.latitude, coords.longitude], {icon: containerIcon})
                         .addTo(map)
                         .bindPopup(popup);
                 });
             })
-            .catch(error => console.error("Erro na requisição:", error));
+            .catch(error => console.error("Request error:", error));
     }
 
-    // Função para criar conteúdo do popup
+    // Function to create popup content
     function createPopupContent(container) {
         const status = calculateStatus(container.currentVolumeLevel, container.capacity);
 
@@ -86,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>`;
     }
 
-    // Funções auxiliares
+    // Helper functions
     function calculateStatus(current, total) {
         const percent = (current / total) * 100;
         return {
@@ -113,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }).replace(',', ' -');
     }
 
-    // Atualiza os dados inicialmente e a cada 30 segundos
+    // Update data initially and every 30 seconds
     updateMapData();
     setInterval(updateMapData, 30000);
 });

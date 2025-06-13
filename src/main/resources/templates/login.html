@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Viana Circular | Autenticação</title>
-  <link rel="icon" th:href="@{/images/app_logo_white.svg}" type="image/png" />
-  <link rel="stylesheet" th:href="@{/css/styles.css}">
-  <link rel="stylesheet" th:href="@{/css/login.css}">
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Viana Circular | Autenticação</title>
+    <link rel="icon" th:href="@{/images/app_logo_white.svg}" type="image/png"/>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 <body>
 
@@ -14,56 +14,56 @@
 
 <!-- Main Content -->
 <main class="main-content">
-  <div class="login-container">
-    <h2 class="login-title">Autenticação</h2>
+    <div class="login-container">
+        <h2 class="login-title">Autenticação</h2>
 
-    <!-- Display error message if login fails -->
-    <div th:if="${param.error}" class="error-message">
-      <p>Nome de utilizador ou palavra-passe inválidos.</p>
-    </div>
-
-    <!-- Display logout message -->
-    <div th:if="${param.logout}" class="success-message">
-      <p>Sessão terminada com sucesso.</p>
-    </div>
-
-    <div class="login-form-container">
-      <form th:action="@{/login}" method="post" class="login-form">
-        <div class="form-group">
-          <label for="username" class="form-label">Nome de utilizador:</label>
-          <input type="text"
-                 id="username"
-                 name="username"
-                 class="form-input"
-                 required
-                 th:value="${username}">
+        <!-- Display error message if login fails -->
+        <div class="error-message" th:if="${param.error}">
+            <p>Nome de utilizador ou palavra-passe inválidos.</p>
         </div>
 
-        <div class="form-group">
-          <label for="password" class="form-label">Palavra-passe:</label>
-          <input type="password"
-                 id="password"
-                 name="password"
-                 class="form-input"
-                 required>
+        <!-- Display logout message -->
+        <div class="success-message" th:if="${param.logout}">
+            <p>Sessão terminada com sucesso.</p>
         </div>
 
-        <div class="checkbox-group">
-          <input type="checkbox"
-                 id="showPassword"
-                 class="checkbox-input">
-          <label for="showPassword" class="checkbox-label">Mostrar palavra-passe</label>
+        <div class="login-form-container">
+            <form class="login-form" method="post" th:action="@{/login}">
+                <div class="form-group">
+                    <label class="form-label" for="username">Nome de utilizador:</label>
+                    <input class="form-input"
+                           id="username"
+                           name="username"
+                           required
+                           th:value="${username}"
+                           type="text">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Palavra-passe:</label>
+                    <input class="form-input"
+                           id="password"
+                           name="password"
+                           required
+                           type="password">
+                </div>
+
+                <div class="checkbox-group">
+                    <input class="checkbox-input"
+                           id="showPassword"
+                           type="checkbox">
+                    <label class="checkbox-label" for="showPassword">Mostrar palavra-passe</label>
+                </div>
+
+                <button class="login-button" type="submit">Aceder</button>
+            </form>
         </div>
 
-        <button type="submit" class="login-button">Aceder</button>
-      </form>
+        <p class="register-link">
+            Ainda não aderiu?
+            <a class="register-anchor" th:href="@{/register}">Registe-se aqui.</a>
+        </p>
     </div>
-
-    <p class="register-link">
-      Ainda não aderiu?
-      <a th:href="@{/register}" class="register-anchor">Registe-se aqui.</a>
-    </p>
-  </div>
 </main>
 
 <div th:insert="~{components/footer :: footer}"></div>

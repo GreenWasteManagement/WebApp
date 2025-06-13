@@ -7,12 +7,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const payload = JSON.parse(atob(token.split('.')[1]));
 
         const response = await fetch(`http://localhost:8080/api/users/get/municipality/${payload.id}`, {
-            method: 'POST',
-            headers: {'Authorization': token}
+            method: 'POST', headers: {'Authorization': token}
         });
         const data = await response.json();
 
-        // Preencher campos do formulário
+        // Populate form fields
         document.getElementById('nome').value = data.user.name || '';
         document.getElementById('utilizador').value = data.user.username || '';
         document.getElementById('email').value = data.user.email || '';
@@ -24,37 +23,36 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('andar').value = data.address.floorNumber || '';
         document.getElementById('andarInfo').value = data.address.floorDetails || '';
 
-        // Código postal
+        // Postal code
         if (data.postalCode?.postalCode) {
             const [cod1, cod2] = data.postalCode.postalCode.split('-');
             document.getElementById('cod1').value = cod1 || '';
             document.getElementById('cod2').value = cod2 || '';
         }
 
-        // Definir data-attributes para IDs
+        // Set data-attributes for IDs
         document.getElementById('utilizador').dataset.userId = data.user.id;
         document.getElementById('rua').dataset.addressId = data.address.id;
         document.getElementById('cod1').dataset.postalCodeId = data.postalCode.id;
         document.getElementById('cc').dataset.municipalityId = data.municipality.id;
     }
 
-
-    // Validação do código postal usando GeoAPI.pt
+    // Validate postal code using GeoAPI.pt
     async function isVianaDoCasteloPostalCode(codigoPostal) {
         try {
-            // A API espera o formato "4900-123"
+            // API expects format "4900-123"
             const response = await fetch(`https://geoapi.pt/cp/${codigoPostal}`);
-            if (!response.ok) throw new Error('API não respondeu');
+            if (!response.ok) throw new Error('API did not respond');
             const data = await response.json();
-            // O campo relevante é "concelho"
+            // The relevant field is "concelho"
             return data.concelho && data.concelho.toLowerCase() === "viana do castelo";
         } catch (e) {
-            // Fallback: aceita prefixo 4900 como válido
+            // Fallback: accept prefix 4900 as valid
             return codigoPostal.startsWith('4900');
         }
     }
 
-    // Submeter formulário
+    // Handle form submission
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -64,11 +62,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const isValid = await isVianaDoCasteloPostalCode(codigoPostal);
         if (!isValid) {
-            alert('O código postal não pertence ao concelho de Viana do Castelo.');
+            alert('The postal code does not belong to the municipality of Viana do Castelo.');
             return;
         }
 
-        // Construir payload para update
+        // Build payload for update
         const payload = {
             user: {
                 id: document.getElementById('utilizador').dataset.userId,
@@ -94,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         };
 
-        // Enviar atualização
+        // Send update
         try {
             const response = await fetch('http://localhost:8080/api/users/update-full-municipality', {
                 method: 'PUT', headers: {
@@ -103,17 +101,17 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             if (response.ok) {
-                alert('Perfil atualizado com sucesso!');
+                alert('Profile updated successfully!');
                 window.location.reload();
             } else {
-                alert('Erro ao atualizar perfil');
+                alert('Error updating profile');
             }
         } catch (error) {
-            console.error('Erro:', error);
+            console.error('Error:', error);
         }
     });
 
-    // Abrir modal
+    // Open modal
     document.querySelectorAll('[onclick*="openEditProfileModal"]').forEach(btn => {
         btn.onclick = async (e) => {
             e.preventDefault();
@@ -122,8 +120,7 @@ document.addEventListener('DOMContentLoaded', function () {
         };
     });
 
-
-    // Fechar modal
+    // Close modal
     editModal.querySelectorAll('.modal-close, .modal-btn-cancel').forEach(btn => {
         btn.onclick = () => editModal.style.display = 'none';
     });

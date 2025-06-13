@@ -2,37 +2,38 @@
 <html lang="pt" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Viana Circular | Recompensas</title>
-    <link rel="icon" th:href="@{/images/app_logo_white.svg}" type="image/png" />
+    <link rel="icon" th:href="@{/images/app_logo_white.svg}" type="image/png"/>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/css/rewards.css}">
     <script th:src="@{/js/rewards.js}"></script>
 </head>
 <body>
 
-    <div th:insert="~{components/header :: header}"></div>
+<div th:insert="~{components/header :: header}"></div>
 
-    <div class="container">
-        <h2 class="page-title">As minhas recompensas</h2>
+<div class="container">
+    <h2 class="page-title">As minhas recompensas</h2>
 
-        <div class="rewards-container">
-            <div class="total-deposited">
-                <h2 class="deposited-title">Quantidade total depositada:</h2>
-                <div class="deposited-amount" id="totalDeposited">0Kg</div>
-                <p class="deposited-info">
-                    Esta quantidade é calculada a partir das quantidades depositadas ao longo de todos os depósitos realizados por si.
-                </p>
-            </div>
+    <div class="rewards-container">
+        <div class="total-deposited">
+            <h2 class="deposited-title">Quantidade total depositada:</h2>
+            <div class="deposited-amount" id="totalDeposited">0Kg</div>
+            <p class="deposited-info">
+                Esta quantidade é calculada a partir das quantidades depositadas ao longo de todos os depósitos
+                realizados por si.
+            </p>
+        </div>
 
-            <div class="rewards-list" id="rewardsList">
-                <!-- Cards vão ser inseridos aqui pelo JS -->
-            </div>
+        <div class="rewards-list" id="rewardsList">
+            <!-- Cards will be added to this place by script -->
         </div>
     </div>
+</div>
 
 
-    <div th:insert="~{components/footer :: footer}"></div>
+<div th:insert="~{components/footer :: footer}"></div>
 
 </body>
 </html>
